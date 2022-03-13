@@ -1,0 +1,327 @@
+﻿<html>
+<head>
+
+<title>Game Test</title>
+<link rel="icon" type="image/png" href="../../images/favicon.png"/>
+
+ <link rel="stylesheet" href="../../styles/dim-custom.css">
+ 
+ <script src="../../scripts/dim-custom.js" type="text/javascript"></script>
+ <script src="../../scripts/sweetalert2.all.min.js"></script> 
+
+ <script src="build.js"></script>
+<script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+
+  <script src="https://rawgit.com/andreasplesch/aframe-meshline-component/master/dist/aframe-meshline-component.min.js"></script>
+
+
+<script>
+
+ var posChecker = 0;
+var clicksCounter = 0;
+   
+   function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+   
+AFRAME.registerComponent('clickhandler', {      
+        init: function () {
+        console.log("bar")
+      this.el.addEventListener("mousedown", (e) => {
+      var cursor = document.querySelector("[cursor]");
+      var cursorPos = cursor.getAttribute("position");
+         document.getElementById("perigrafi").innerHTML = cursorPos;
+         //  document.querySelector("a-box").setAttribute("position", cursorPos);
+           
+            });
+      } 
+     
+      });
+      
+      
+</script>
+   
+  </head>
+  
+  
+  <body>
+  
+  
+  <div id="counterArea"><div id="counterTxt">Score:</div> <div id="counterBox"></div></div>
+
+<div id="perigrafi">Τοποθέτησε την μπάλα μέσα στο κουτί που αντιστοιχεί στο χρώμα της</div>
+
+    <a-scene physics="debug: true" cursor="rayOrigin:mouse">
+      
+      
+      
+       <a-sphere id="sphere" position="5 1.5 -5" radius="1" color="#f00" clickhandler click-drag dynamic-body="mass: 200"></a-sphere>
+        
+        
+     <a-box id="box" position="-9 1.5 -5" width="3" height="0.5" depth="3" color="#f00" static-body></a-box>
+        <a-box id="box1" position="-10.5 1.5 -5" width="0.5" height="3" depth="3" color="#f00" static-body></a-box>  
+        <a-box id="box2" position="-7.5 1.5 -5" width="0.5" height="3" depth="3" color="#f00" static-body></a-box>
+        <a-box id="box3" position="-9 1.5 -6.5" width="3" height="3" depth="0.5" color="#f00" static-body></a-box>
+        <a-box id="box4" position="-9 1.5 -3.5" width="3" height="3" depth="0.5" color="#f00" static-body></a-box>  
+        
+        <a-box id="box" position="0 1.5 -5" width="3" height="0.5" depth="3" color="#ff0" static-body></a-box>
+        <a-box id="box1" position="-1.5 1.5 -5" width="0.5" height="3" depth="3" color="#ff0" static-body></a-box>  
+        <a-box id="box2" position="1.5 1.5 -5" width="0.5" height="3" depth="3" color="#ff0" static-body></a-box>
+        <a-box id="box3" position="0 1.5 -6.5" width="3" height="3" depth="0.5" color="#ff0" static-body></a-box>
+        <a-box id="box4" position="0 1.5 -3.5" width="3" height="3" depth="0.5" color="#ff0" static-body></a-box> 
+        
+        <a-box id="box" position="9 1.5 -5" width="3" height="0.5" depth="3" color="#00f" static-body></a-box>
+        <a-box id="box1" position="10.5 1.5 -5" width="0.5" height="3" depth="3" color="#00f" static-body></a-box>  
+        <a-box id="box2" position="7.5 1.5 -5" width="0.5" height="3" depth="3" color="#00f" static-body></a-box>
+        <a-box id="box3" position="9 1.5 -6.5" width="3" height="3" depth="0.5" color="#00f" static-body></a-box>
+        <a-box id="box4" position="9 1.5 -3.5" width="3" height="3" depth="0.5" color="#00f" static-body></a-box>  
+      
+     
+      
+      
+      <a-plane static-body position="0 0 0" rotation="-90 0 0" width="100%" height="50%" color="#7BC8A4"></a-plane>
+      <a-sky color="#87CEEB"></a-sky>
+
+
+
+       <a-entity position="0 4 7">
+      <a-camera id="camera" look-controls-enabled="false" keyboard-controls="mode: fps">
+    </a-camera>
+        
+       
+      </a-entity>
+       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <script>
+        
+        
+        var draggable = document.querySelector('[click-drag]');
+        draggable.addEventListener('dragstart', function(dragInfo) {
+          draggable.components['dynamic-body'].pause();
+        });
+        draggable.addEventListener('dragend', function(dragInfo) {
+
+          // We're dealing with a very heavy ball (mass: 10), so we want to
+          // reduce the velocity a little
+          var velocityDamp = 0.5;
+
+          var camera = draggable.sceneEl.camera;
+
+          // The "up" vector of the camera
+          var rotation = camera.up.clone();
+          // crossed with the "forward" / direction vector of the camera
+          // gives us the 3rd orthogonal axis of the camera's rotation
+          rotation.cross(camera.getWorldDirection());
+
+          // A damped down velocity vector
+          var rotatedVelocity = new window.AFRAME.THREE.Vector3(
+            dragInfo.detail.velocity.x * velocityDamp,
+            dragInfo.detail.velocity.y * velocityDamp,
+            dragInfo.detail.velocity.z * velocityDamp
+          );
+
+          // Which we then rotate *into* the screen by 45 degrees
+          // This gives the feeling of "tossing" the ball
+          rotatedVelocity.applyAxisAngle(rotation, Math.PI / 8);
+
+          draggable.components['dynamic-body'].play();
+          draggable.body.velocity.set(rotatedVelocity.x, rotatedVelocity.y, rotatedVelocity.z);
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+var posChecker = 0;
+       
+        var sphera = document.querySelector("#sphere");
+ var positSphere;
+var clicksCounter = 0;
+
+var refreshIntervalId = setInterval(oneSecFun, 500);
+
+function oneSecFun() { 
+
+  positSphere = sphera.getAttribute("position");
+  
+  if (posChecker == 0) {
+    if (positSphere.x > -10 && positSphere.x < -7) {
+    if (positSphere.y < 3 && positSphere.y > 2.5) {
+    
+    
+    clicksCounter++;
+    document.getElementById("counterBox").innerHTML = clicksCounter;
+    
+     
+ posChecker = getRandomInt(3);
+    
+      if (posChecker == 0) {
+sphera.setAttribute('color', '#ff0');
+posChecker = 1;
+ } 
+ else if (posChecker == 1) {
+sphera.setAttribute('color', '#ff0');
+ } 
+  else if (posChecker == 2) {
+sphera.setAttribute('color', '#00f');
+ } 
+ 
+  if (clicksCounter == 10) {
+  Swal.fire({
+  title: 'Συγχαρητήρια, ολοκλήρωσες επιτυχώς το επίπεδο!',
+  showDenyButton: false,
+  showCancelButton: false,
+  confirmButtonText: `Κλείσιμο Παραθύρου`,
+  denyButtonText: `Ξαναπαίξε το ίδιο Επίπεδο`,
+  cancelButtonText: `Κλείσιμο Παραθύρου`,
+}).then((result) => {
+  if (result.isConfirmed) {
+// do nothing
+  } else if (result.isDenied) {
+    location.reload(); 
+  }
+});
+
+
+clearInterval(refreshIntervalId);
+ }
+    
+
+  }
+  }
+ }
+ 
+ 
+ 
+ 
+ if (posChecker == 1) {
+    if (positSphere.x > -1 && positSphere.x < 1) {
+    if (positSphere.y < 3 && positSphere.y > 2.5) {
+    
+    
+    clicksCounter++;
+    document.getElementById("counterBox").innerHTML = clicksCounter;
+    
+     
+ posChecker = getRandomInt(3);
+    
+      if (posChecker == 0) {
+sphera.setAttribute('color', '#f00');
+ } 
+ else if (posChecker == 1) {
+sphera.setAttribute('color', '#f00');
+posChecker = 0;
+ } 
+  else if (posChecker == 2) {
+sphera.setAttribute('color', '#00f');
+ } 
+ 
+  if (clicksCounter == 10) {
+  Swal.fire({
+  title: 'Συγχαρητήρια, ολοκλήρωσες επιτυχώς το επίπεδο!',
+  showDenyButton: false,
+  showCancelButton: false,
+  confirmButtonText: `Κλείσιμο Παραθύρου`,
+  denyButtonText: `Ξαναπαίξε το ίδιο Επίπεδο`,
+  cancelButtonText: `Κλείσιμο Παραθύρου`,
+}).then((result) => {
+  if (result.isConfirmed) {
+// do nothing
+  } else if (result.isDenied) {
+    location.reload(); 
+  }
+});
+
+
+clearInterval(refreshIntervalId);
+ }
+    
+
+  }
+  }
+ }
+ 
+ 
+ 
+ 
+ 
+ if (posChecker == 2) {
+    if (positSphere.x > 7 && positSphere.x < 10) {
+    if (positSphere.y < 3 && positSphere.y > 2.5) {
+    
+    
+    clicksCounter++;
+    document.getElementById("counterBox").innerHTML = clicksCounter;
+    
+     
+ posChecker = getRandomInt(3);
+    
+      if (posChecker == 0) {
+sphera.setAttribute('color', '#f00');
+ } 
+ else if (posChecker == 1) {
+sphera.setAttribute('color', '#ff0');
+ } 
+  else if (posChecker == 2) {
+sphera.setAttribute('color', '#f00');
+posChecker = 0;
+ } 
+ 
+  if (clicksCounter == 10) {
+  Swal.fire({
+  title: 'Συγχαρητήρια, ολοκλήρωσες επιτυχώς το επίπεδο!',
+  showDenyButton: false,
+  showCancelButton: false,
+  confirmButtonText: `Κλείσιμο Παραθύρου`,
+  denyButtonText: `Ξαναπαίξε το ίδιο Επίπεδο`,
+  cancelButtonText: `Κλείσιμο Παραθύρου`,
+}).then((result) => {
+  if (result.isConfirmed) {
+// do nothing
+  } else if (result.isDenied) {
+    location.reload(); 
+  }
+});
+
+
+clearInterval(refreshIntervalId);
+ }
+    
+
+  }
+  }
+ }
+  
+  
+  }
+  
+      </script>
+    </a-scene>
+  </body>
+  
+  
+
+
+</html>

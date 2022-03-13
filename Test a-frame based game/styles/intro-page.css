@@ -1,0 +1,16 @@
+body {
+    background: #2a3c65;
+}
+
+button {
+    padding: 10px 20px;
+    display: flex;
+    left: calc(50% - 71px);
+    top: calc(50% - 23.5px);
+    position: absolute;
+    font-size: 20px;
+    color: #fff !important;
+    background: #949494;
+    border-radius: 20px;
+    text-align: center;
+}

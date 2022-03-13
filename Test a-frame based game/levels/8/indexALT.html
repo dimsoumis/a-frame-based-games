@@ -1,0 +1,223 @@
+﻿<html>
+<head>
+
+<title>Game Test</title>
+<link rel="icon" type="image/png" href="../../images/favicon.png"/>
+
+ <link rel="stylesheet" href="../../styles/dim-custom.css">
+ 
+ <script src="../../scripts/dim-custom.js" type="text/javascript"></script>
+ <script src="../../scripts/sweetalert2.all.min.js"></script> 
+
+ <script src="build.js"></script>
+<script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+
+  <script src="https://rawgit.com/andreasplesch/aframe-meshline-component/master/dist/aframe-meshline-component.min.js"></script>
+  
+  <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.0/dist/aframe-extras.min.js"></script>
+<script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+
+
+      <script>
+
+
+
+
+   
+AFRAME.registerComponent('clickhandler', {      
+        init: function () {
+        console.log("bar")
+      this.el.addEventListener("mousedown", (e) => {
+      var cursor = document.querySelector("[cursor]");
+      var cursorPos = cursor.getAttribute("position");
+         document.getElementById("perigrafi").innerHTML = cursorPos;
+         //  document.querySelector("a-box").setAttribute("position", cursorPos);
+           
+            });
+      } 
+     
+      });
+      
+      
+</script>
+   
+  </head>
+  
+  
+  <body>
+  
+  
+  <div id="counterArea" style="display: none;"><div id="counterTxt">&nbsp;</div> <div id="counterBox"></div></div>
+
+<button id="restartButton" onclick="restartEpipedo()">Επανεκκίνηση</button>
+
+<div id="perigrafi">Χτύπα και κούνησε όλους τους κυλίνδρους</div>
+
+
+    <a-scene cursor="rayOrigin:mouse">
+      
+      
+      <a-sphere  id="sphere" position="-9.5 1.5 -10" rotation="0 0 0" color="#f00" clickhandler click-drag dynamic-body="mass: 10"></a-sphere>
+      
+      <a-cylinder  id="cylinder1" radius="0.4" height="2" position="8 1 -10" rotation="0 0 0" color="#f00" clickhandler click-drag dynamic-body="mass: 9"></a-cylinder>
+     
+      <a-cylinder  id="cylinder2" radius="0.4" height="2" position="9.5 1 -11" rotation="0 0 0" color="#f00" clickhandler click-drag dynamic-body="mass: 9"></a-cylinder>
+      <a-cylinder  id="cylinder3" radius="0.4" height="2" position="9.5 1 -9" rotation="0 0 0" color="#f00" clickhandler click-drag dynamic-body="mass: 9"></a-cylinder>
+            
+      <a-cylinder  id="cylinder4" radius="0.4" height="2" position="11 1 -12" rotation="0 0 0" color="#f00" clickhandler click-drag dynamic-body="mass: 9"></a-cylinder>
+      <a-cylinder  id="cylinder5" radius="0.4" height="2" position="11 1 -10" rotation="0 0 0" color="#f00" clickhandler click-drag dynamic-body="mass: 9"></a-cylinder>
+      <a-cylinder  id="cylinder6" radius="0.4" height="2" position="11 1 -8" rotation="0 0 0" color="#f00" clickhandler click-drag dynamic-body="mass: 9"></a-cylinder>
+      
+      
+      <a-plane static-body position="0 0 0" rotation="-90 0 0" width="100%" height="50%" color="#7BC8A4"></a-plane>
+      <a-sky color="#87CEEB"></a-sky>
+
+
+
+       <a-entity position="0 3 5">
+      <a-camera id="camera" look-controls-enabled="false" keyboard-controls="mode: fps">
+    </a-camera>
+        
+       
+      </a-entity>
+       
+      
+      
+      
+      
+      
+      
+      
+        <script>
+        
+        
+        
+        
+  
+  
+  
+  
+        var draggable = document.querySelector('[click-drag]');
+        draggable.addEventListener('dragstart', function(dragInfo) {
+          draggable.components['dynamic-body'].pause();
+        });
+        draggable.addEventListener('dragend', function(dragInfo) {
+
+          // We're dealing with a very heavy ball (mass: 10), so we want to
+          // reduce the velocity a little
+          var velocityDamp = 0.5;
+
+          var camera = draggable.sceneEl.camera;
+
+          // The "up" vector of the camera
+          var rotation = camera.up.clone();
+          // crossed with the "forward" / direction vector of the camera
+          // gives us the 3rd orthogonal axis of the camera's rotation
+          rotation.cross(camera.getWorldDirection());
+
+          // A damped down velocity vector
+          var rotatedVelocity = new window.AFRAME.THREE.Vector3(
+            dragInfo.detail.velocity.x * velocityDamp,
+            dragInfo.detail.velocity.y * velocityDamp,
+            dragInfo.detail.velocity.z * velocityDamp
+          );
+
+          // Which we then rotate *into* the screen by 45 degrees
+          // This gives the feeling of "tossing" the ball
+          rotatedVelocity.applyAxisAngle(rotation, Math.PI / 8);
+
+          draggable.components['dynamic-body'].play();
+          draggable.body.velocity.set(rotatedVelocity.x, rotatedVelocity.y, rotatedVelocity.z);
+        });
+      
+      
+      
+      
+      
+      
+    function restartEpipedo() {
+    location.reload();
+    }
+    
+    
+      
+ var cylin1 = document.querySelector("#cylinder1");
+ var positCylinder1;
+
+ var cylin2 = document.querySelector("#cylinder2");
+ var positCylinder2;
+ 
+ var cylin3 = document.querySelector("#cylinder3");
+ var positCylinder3;
+ 
+ var cylin4 = document.querySelector("#cylinder4");
+ var positCylinder4;
+ 
+ var cylin5 = document.querySelector("#cylinder5");
+ var positCylinder5;
+ 
+ var cylin6 = document.querySelector("#cylinder6");
+ var positCylinder6;
+ 
+ 
+ var mpala = document.querySelector("a-sphere");
+ var positMpala;
+
+
+var refreshIntervalId = setInterval(oneSecFun, 500);
+
+function oneSecFun() { 
+
+  positCylinder1 = cylin1.getAttribute("position");
+   positCylinder2 = cylin2.getAttribute("position");
+    positCylinder3 = cylin3.getAttribute("position");
+     positCylinder4 = cylin4.getAttribute("position");
+      positCylinder5 = cylin5.getAttribute("position");
+       positCylinder6 = cylin6.getAttribute("position");
+  
+    if (positCylinder1.x > 8.2 || positCylinder1.x < 7.98) {
+    if (positCylinder2.x > 9.7 || positCylinder2.x < 9.48) {
+    if (positCylinder3.x > 9.7 || positCylinder3.x < 9.48) {
+    if (positCylinder4.x > 11.2 || positCylinder4.x < 10.98) {
+    if (positCylinder5.x > 11.2 || positCylinder5.x < 10.98) {
+    if (positCylinder6.x > 11.2 || positCylinder6.x < 10.98) {
+  Swal.fire({
+  title: 'Συγχαρητήρια, ολοκλήρωσες επιτυχώς το επίπεδο!',
+  showDenyButton: true,
+  showCancelButton: false,
+  confirmButtonText: `Επόμενο Επίπεδο`,
+  denyButtonText: `Ξαναπαίξε το ίδιο Επίπεδο`,
+  cancelButtonText: `Κλείσιμο Παραθύρου`,
+}).then((result) => {
+  if (result.isConfirmed) {
+window.location.href = "../9/indexALT.html";
+  } else if (result.isDenied) {
+    location.reload(); 
+  }
+});
+
+
+clearInterval(refreshIntervalId);
+  }
+  }}}}}
+  }
+
+
+
+      
+      </script>
+      
+      
+      
+      
+   
+      
+    </a-scene>
+    
+ 
+  </body>
+  
+  
+
+
+</html>

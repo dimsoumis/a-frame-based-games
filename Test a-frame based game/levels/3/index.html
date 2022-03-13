@@ -1,0 +1,646 @@
+﻿<html>
+<head>
+
+<title>Game Test</title>
+<link rel="icon" type="image/png" href="../../images/favicon.png"/>
+
+ <link rel="stylesheet" href="../../styles/dim-custom.css">
+ 
+ <script src="../../scripts/dim-custom.js" type="text/javascript"></script>
+ <script src="../../scripts/sweetalert2.all.min.js"></script> 
+ 
+ <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+<script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+   
+   <script>
+      var colorChecker = 0;
+   var clicksCounter = 0;
+   
+   function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+   
+AFRAME.registerComponent('clickhandler', {
+        schema: {
+          txt: {default:'default'}
+        },        
+        init: function () {
+          var data = this.data;
+          var el = this.el;        
+          el.addEventListener('click', function () {            
+           console.log(data.txt);
+           
+           if (colorChecker == 0) {
+
+            colorChecker = getRandomInt(6);
+            
+            if (colorChecker == 0) {
+            document.getElementById("perigrafi").style.display = "block";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 1) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "block";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 2) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "block";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 3) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "block";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 4) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "block";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "block";
+            }
+            
+            clicksCounter++;
+            document.getElementById("counterBox").innerHTML = clicksCounter;
+            if (clicksCounter == 10) {
+            
+            Swal.fire({
+  title: 'Συγχαρητήρια, ολοκλήρωσες επιτυχώς το επίπεδο!',
+  showDenyButton: true,
+  showCancelButton: false,
+  confirmButtonText: `Επόμενο Επίπεδο`,
+  denyButtonText: `Ξαναπαίξε το ίδιο Επίπεδο`,
+  cancelButtonText: `Κλείσιμο Παραθύρου`,
+}).then((result) => {
+  if (result.isConfirmed) {
+window.location.href = "../4/index.html";
+  } else if (result.isDenied) {
+    location.reload(); 
+  }
+})
+            }
+            }
+            else {
+            if (clicksCounter > 0) {
+            clicksCounter--;
+            document.getElementById("counterBox").innerHTML = clicksCounter;
+            }
+            }
+          });        
+        }
+      });
+      
+      
+      
+      AFRAME.registerComponent('clickhandler2', {
+        schema: {
+          txt: {default:'default'}
+        },        
+        init: function () {
+          var data = this.data;
+          var el = this.el;        
+          el.addEventListener('click', function () {            
+           console.log(data.txt);
+           
+           if (colorChecker == 1) {
+   
+            colorChecker = getRandomInt(6);
+            
+             if (colorChecker == 0) {
+            document.getElementById("perigrafi").style.display = "block";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 1) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "block";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 2) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "block";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 3) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "block";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 4) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "block";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "block";
+            }
+            
+            clicksCounter++;
+            document.getElementById("counterBox").innerHTML = clicksCounter;
+             if (clicksCounter == 10) {
+               Swal.fire({
+  title: 'Συγχαρητήρια, ολοκλήρωσες επιτυχώς το επίπεδο!',
+  showDenyButton: true,
+  showCancelButton: false,
+  confirmButtonText: `Επόμενο Επίπεδο`,
+  denyButtonText: `Ξαναπαίξε το ίδιο Επίπεδο`,
+  cancelButtonText: `Κλείσιμο Παραθύρου`,
+}).then((result) => {
+  if (result.isConfirmed) {
+window.location.href = "../4/index.html";
+  } else if (result.isDenied) {
+   location.reload(); 
+  }
+})
+            }
+            }
+            else {
+          if (clicksCounter > 0) {
+            clicksCounter--;
+            document.getElementById("counterBox").innerHTML = clicksCounter;
+            }
+            }
+          });        
+        }
+      });
+      
+      
+      
+      AFRAME.registerComponent('clickhandler3', {
+        schema: {
+          txt: {default:'default'}
+        },        
+        init: function () {
+          var data = this.data;
+          var el = this.el;        
+          el.addEventListener('click', function () {            
+           console.log(data.txt);
+           
+           if (colorChecker == 2) {
+      
+           colorChecker = getRandomInt(6);
+           
+            if (colorChecker == 0) {
+            document.getElementById("perigrafi").style.display = "block";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 1) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "block";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 2) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "block";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 3) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "block";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 4) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "block";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "block";
+            }
+            
+            clicksCounter++;
+            document.getElementById("counterBox").innerHTML = clicksCounter;
+             if (clicksCounter == 10) {
+                 Swal.fire({
+  title: 'Συγχαρητήρια, ολοκλήρωσες επιτυχώς το επίπεδο!',
+  showDenyButton: true,
+  showCancelButton: false,
+  confirmButtonText: `Επόμενο Επίπεδο`,
+  denyButtonText: `Ξαναπαίξε το ίδιο Επίπεδο`,
+  cancelButtonText: `Κλείσιμο Παραθύρου`,
+}).then((result) => {
+  if (result.isConfirmed) {
+window.location.href = "../4/index.html";
+  } else if (result.isDenied) {
+    location.reload(); 
+  }
+})
+            }
+            }
+            else {
+          if (clicksCounter > 0) {
+            clicksCounter--;
+            document.getElementById("counterBox").innerHTML = clicksCounter;
+            }
+            }
+          });        
+        }
+      });
+      
+      
+      
+      
+       AFRAME.registerComponent('clickhandler4', {
+        schema: {
+          txt: {default:'default'}
+        },        
+        init: function () {
+          var data = this.data;
+          var el = this.el;        
+          el.addEventListener('click', function () {            
+           console.log(data.txt);
+           
+           if (colorChecker == 3) {
+      
+           colorChecker = getRandomInt(6);
+           
+            if (colorChecker == 0) {
+            document.getElementById("perigrafi").style.display = "block";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 1) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "block";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 2) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "block";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 3) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "block";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 4) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "block";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "block";
+            }
+            
+            clicksCounter++;
+            document.getElementById("counterBox").innerHTML = clicksCounter;
+             if (clicksCounter == 10) {
+                 Swal.fire({
+  title: 'Συγχαρητήρια, ολοκλήρωσες επιτυχώς το επίπεδο!',
+  showDenyButton: true,
+  showCancelButton: false,
+  confirmButtonText: `Επόμενο Επίπεδο`,
+  denyButtonText: `Ξαναπαίξε το ίδιο Επίπεδο`,
+  cancelButtonText: `Κλείσιμο Παραθύρου`,
+}).then((result) => {
+  if (result.isConfirmed) {
+window.location.href = "../4/index.html";
+  } else if (result.isDenied) {
+    location.reload(); 
+  }
+})
+            }
+            }
+            else {
+          if (clicksCounter > 0) {
+            clicksCounter--;
+            document.getElementById("counterBox").innerHTML = clicksCounter;
+            }
+            }
+          });        
+        }
+      });
+      
+      
+      
+      
+      
+      
+      
+       AFRAME.registerComponent('clickhandler5', {
+        schema: {
+          txt: {default:'default'}
+        },        
+        init: function () {
+          var data = this.data;
+          var el = this.el;        
+          el.addEventListener('click', function () {            
+           console.log(data.txt);
+           
+           if (colorChecker == 4) {
+      
+           colorChecker = getRandomInt(6);
+           
+            if (colorChecker == 0) {
+            document.getElementById("perigrafi").style.display = "block";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 1) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "block";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 2) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "block";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 3) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "block";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 4) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "block";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "block";
+            }
+            
+            clicksCounter++;
+            document.getElementById("counterBox").innerHTML = clicksCounter;
+             if (clicksCounter == 10) {
+                 Swal.fire({
+  title: 'Συγχαρητήρια, ολοκλήρωσες επιτυχώς το επίπεδο!',
+  showDenyButton: true,
+  showCancelButton: false,
+  confirmButtonText: `Επόμενο Επίπεδο`,
+  denyButtonText: `Ξαναπαίξε το ίδιο Επίπεδο`,
+  cancelButtonText: `Κλείσιμο Παραθύρου`,
+}).then((result) => {
+  if (result.isConfirmed) {
+window.location.href = "../4/index.html";
+  } else if (result.isDenied) {
+    location.reload(); 
+  }
+})
+            }
+            }
+            else {
+          if (clicksCounter > 0) {
+            clicksCounter--;
+            document.getElementById("counterBox").innerHTML = clicksCounter;
+            }
+            }
+          });        
+        }
+      });
+      
+      
+      
+      
+      
+      
+      
+      
+       AFRAME.registerComponent('clickhandler6', {
+        schema: {
+          txt: {default:'default'}
+        },        
+        init: function () {
+          var data = this.data;
+          var el = this.el;        
+          el.addEventListener('click', function () {            
+           console.log(data.txt);
+           
+           if (colorChecker == 5) {
+      
+           colorChecker = getRandomInt(6);
+           
+            if (colorChecker == 0) {
+            document.getElementById("perigrafi").style.display = "block";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 1) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "block";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 2) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "block";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 3) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "block";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else if (colorChecker == 4) {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "block";
+            document.getElementById("perigrafi6").style.display = "none";
+            }
+            else {
+            document.getElementById("perigrafi").style.display = "none";
+            document.getElementById("perigrafi2").style.display = "none";
+            document.getElementById("perigrafi3").style.display = "none";
+            document.getElementById("perigrafi4").style.display = "none";
+            document.getElementById("perigrafi5").style.display = "none";
+            document.getElementById("perigrafi6").style.display = "block";
+            }
+            
+            clicksCounter++;
+            document.getElementById("counterBox").innerHTML = clicksCounter;
+             if (clicksCounter == 10) {
+                 Swal.fire({
+  title: 'Συγχαρητήρια, ολοκλήρωσες επιτυχώς το επίπεδο!',
+  showDenyButton: true,
+  showCancelButton: false,
+  confirmButtonText: `Επόμενο Επίπεδο`,
+  denyButtonText: `Ξαναπαίξε το ίδιο Επίπεδο`,
+  cancelButtonText: `Κλείσιμο Παραθύρου`,
+}).then((result) => {
+  if (result.isConfirmed) {
+window.location.href = "../4/index.html";
+  } else if (result.isDenied) {
+    location.reload(); 
+  }
+})
+            }
+            }
+            else {
+          if (clicksCounter > 0) {
+            clicksCounter--;
+            document.getElementById("counterBox").innerHTML = clicksCounter;
+            }
+            }
+          });        
+        }
+      });
+      </script>
+
+</head>
+
+<body>
+
+<div id="counterArea"><div id="counterTxt">Score:</div> <div id="counterBox"></div></div>
+
+<div id="perigrafi">Επίλεξε τον κόκκινο κύβο</div>
+<div id="perigrafi2" style="display: none;">Επίλεξε την πράσινη σφαίρα</div>
+<div id="perigrafi3" style="display: none;">Επίλεξε τον μπλε κύλινδρο</div>
+<div id="perigrafi4" style="display: none;">Επίλεξε τον πράσινο κύβο</div>
+<div id="perigrafi5" style="display: none;">Επίλεξε την μπλε σφαίρα</div>
+<div id="perigrafi6" style="display: none;">Επίλεξε τον κόκκινο κύλινδρο</div>
+
+
+<a-scene>
+      
+            <a-box position="0 1.5 -5" rotation="0 0 0" color="#f00" clickhandler="txt:box"></a-box>
+            
+      <a-sphere position="2 1.5 -5" radius="0.8" color="#0f0" clickhandler2="txt:sphere"></a-sphere>
+      
+      <a-cylinder position="-2 1.5 -5" radius="0.5" height="1.5" color="#00f" clickhandler3="txt:cylinder"></a-cylinder>
+      
+      
+       <a-box position="0 3.5 -5" rotation="0 0 0" color="#0f0" clickhandler4="txt:box2"></a-box>
+            
+      <a-sphere position="2 3.5 -5" radius="0.8" color="#00f" clickhandler5="txt:sphere2"></a-sphere>
+      
+      <a-cylinder position="-2 3.5 -5" radius="0.5" height="1.5" color="#f00" clickhandler6="txt:cylinder2"></a-cylinder>
+      
+      
+      <a-plane position="0 0 0" rotation="-90 0 0" width="100%" height="50%" color="#7BC8A4"></a-plane>
+      <a-sky color="#87CEEB"></a-sky>
+  
+      
+     <a-entity position="0 1 2">
+    <a-camera id="camera">
+      <a-cursor color="#4CC3D9"></a-cursor>
+    </a-camera>
+  </a-entity>
+  
+  
+
+  
+    </a-scene>
+  
+
+
+</body>
+
+</html>
